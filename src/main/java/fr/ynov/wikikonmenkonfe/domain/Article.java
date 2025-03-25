@@ -6,13 +6,11 @@ public class Article {
     private Category category;
     private User author;
     private int views;
-    private int likes;
 
     public Article(String title, String content) {
         this.title = title;
         this.content = content;
         this.views = 0;
-        this.likes = 0;
     }
 
     public Article(String title, String content, User author) {
@@ -49,20 +47,12 @@ public class Article {
         return views;
     }
 
-    public int getLikes() {
-        return likes;
-    }
-
     public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public void like() {
-        likes++;
     }
 
     public Article read() {

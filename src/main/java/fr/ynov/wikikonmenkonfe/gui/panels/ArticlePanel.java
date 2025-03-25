@@ -15,9 +15,7 @@ public class ArticlePanel extends JPanel {
     private final JLabel authorLabel;
     private final JLabel categoryLabel;
     private final JLabel viewsLabel;
-    private final JLabel likesLabel;
     private final JTextArea contentArea;
-    private final JButton likeButton;
     private Article currentArticle;
 
     public ArticlePanel(WikiGUI mainFrame) {
@@ -42,9 +40,7 @@ public class ArticlePanel extends JPanel {
 
         JPanel statsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         viewsLabel = new JLabel("Views: 0");
-        likesLabel = new JLabel("Likes: 0");
         statsPanel.add(viewsLabel);
-        statsPanel.add(likesLabel);
         statsPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         headerPanel.add(titleLabel);
@@ -64,15 +60,6 @@ public class ArticlePanel extends JPanel {
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         buttonPanel.add(NavigationButton.createBackButton(mainFrame));
-
-        likeButton = new JButton("Like");
-        likeButton.addActionListener(e -> {
-            if (currentArticle != null) {
-                currentArticle.like();
-                likesLabel.setText("Likes: " + currentArticle.getLikes());
-            }
-        });
-        buttonPanel.add(likeButton);
 
         add(headerPanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
@@ -98,7 +85,6 @@ public class ArticlePanel extends JPanel {
         }
 
         viewsLabel.setText("Views: " + article.getViews());
-        likesLabel.setText("Likes: " + article.getLikes());
         contentArea.setText(article.getContent());
         article.read();
     }
