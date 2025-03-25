@@ -16,13 +16,15 @@ public class ActionButton extends JButton {
     public static ActionButton createSearchButton(JTextField searchField, WikiGUI mainFrame) {
         return new ActionButton("Search", e -> {
             String query = searchField.getText().trim();
-            if (!query.isEmpty()) {
-                mainFrame.performSearch(query);
-            }
+            mainFrame.performSearch(query);
         });
     }
 
     public static ActionButton createLoginButton(WikiGUI mainFrame) {
         return new ActionButton("Login", e -> mainFrame.showLoginDialog());
+    }
+
+    public static ActionButton createWriteButton(WikiGUI mainFrame) {
+        return new ActionButton("Write", e -> mainFrame.showWriteDialog());
     }
 }

@@ -1,10 +1,11 @@
 package main.java.fr.ynov.wikikonmenkonfe.gui;
 
-import main.java.fr.ynov.wikikonmenkonfe.domain.Article;
-import main.java.fr.ynov.wikikonmenkonfe.domain.User;
-import main.java.fr.ynov.wikikonmenkonfe.domain.Wiki;
+import main.java.fr.ynov.wikikonmenkonfe.domain.*;
+import main.java.fr.ynov.wikikonmenkonfe.exception.AuthenticationRequiredException;
+import main.java.fr.ynov.wikikonmenkonfe.exception.PermissionDeniedException;
 import main.java.fr.ynov.wikikonmenkonfe.gui.frames.MainFrame;
-import main.java.fr.ynov.wikikonmenkonfe.gui.frames.UserFrame;
+import main.java.fr.ynov.wikikonmenkonfe.gui.frames.LoginFrame;
+import main.java.fr.ynov.wikikonmenkonfe.gui.frames.WriteFrame;
 import main.java.fr.ynov.wikikonmenkonfe.gui.panels.ArticlePanel;
 import main.java.fr.ynov.wikikonmenkonfe.gui.panels.UserPanel;
 import main.java.fr.ynov.wikikonmenkonfe.gui.panels.WelcomePanel;
@@ -33,7 +34,9 @@ public class WikiGUI {
     public void navigateTo(String panelName) {
         mainFrame.navigateTo(panelName);
 
-        if (USER_PANEL.equals(panelName) && currentUser != null) {
+        if (WELCOME_PANEL.equals(panelName)) {
+            getWelcomePanel().clearSelection();
+        } else if (USER_PANEL.equals(panelName) && currentUser != null) {
             UserPanel userPanel = getUserPanel();
             userPanel.setUser(currentUser);
         }
@@ -44,13 +47,65 @@ public class WikiGUI {
     }
 
     public void showLoginDialog() {
-        UserFrame userFrame = new UserFrame(mainFrame, wiki);
-        userFrame.setVisible(true);
+        LoginFrame loginFrame = new LoginFrame(mainFrame, wiki);
+        loginFrame.setVisible(true);
 
-        User loggedInUser = userFrame.getLoggedInUser();
+        User loggedInUser = loginFrame.getLoggedInUser();
         if (loggedInUser != null) {
             this.currentUser = loggedInUser;
             JOptionPane.showMessageDialog(mainFrame, "Welcome, " + loggedInUser.getName() + "!");
+        }
+    }
+
+    public void showWriteDialog() {
+        try {
+            if (currentUser == null) {
+                throw new AuthenticationRequiredException("You must be logged in to write articles");
+            }
+
+            if (!(currentUser instanceof Admin || currentUser instanceof Writer)) {
+                throw new PermissionDeniedException("Only Writers and Administrators can write articles");
+            }
+
+            WriteFrame writeFrame = new WriteFrame(mainFrame, this, null);
+            writeFrame.setVisible(true);
+
+        } catch (AuthenticationRequiredException e) {
+            JOptionPane.showMessageDialog(mainFrame,
+                    e.getMessage(),
+                    "Authentication Required",
+                    JOptionPane.WARNING_MESSAGE);
+        } catch (PermissionDeniedException e) {
+            JOptionPane.showMessageDialog(mainFrame,
+                    "PermissionDeniedException: " + e.getMessage(),
+                    "Permission Denied",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void showEditDialog(Article articleToEdit) {
+        try {
+            if (currentUser == null) {
+                throw new AuthenticationRequiredException("You must be logged in to edit articles");
+            }
+
+            if (!(currentUser instanceof Admin)) {
+                throw new PermissionDeniedException("Only Administrators can edit articles");
+            }
+
+            WriteFrame writeFrame = new WriteFrame(mainFrame, this, articleToEdit);
+            writeFrame.setVisible(true);
+
+        } catch (AuthenticationRequiredException e) {
+            JOptionPane.showMessageDialog(mainFrame,
+                    e.getMessage(),
+                    "Authentication Required",
+                    JOptionPane.WARNING_MESSAGE);
+        } catch (PermissionDeniedException e) {
+            JOptionPane.showMessageDialog(mainFrame,
+                    "PermissionDeniedException: " + e.getMessage(),
+                    "Permission Denied",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -62,6 +117,12 @@ public class WikiGUI {
         List<Article> results = wiki.searchArticle(query);
         WelcomePanel welcomePanel = getWelcomePanel();
         welcomePanel.updateSearchResults(results);
+    }
+    
+    public void updateArticlesList() {
+        List<Article> allArticles = wiki.articlesList;
+        WelcomePanel welcomePanel = getWelcomePanel();
+        welcomePanel.updateSearchResults(allArticles);
     }
 
     public void displayArticle(Article article) {

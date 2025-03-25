@@ -18,10 +18,9 @@ public class Writer extends User {
         article.read();
     }
 
-    public Article writeArticle(String title, String content, ArticleFactory factory) {
-        Article article = factory.createArticle(title, content);
-        writtenArticles.add(article);
-        return article;
+    public void writeArticle(String title, String content, Wiki wiki) {
+        Article article = new Article(title, content);
+        wiki.addArticle(article);
     }
 
     public void editArticle(Article article, String newContent) {

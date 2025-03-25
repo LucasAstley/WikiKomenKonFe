@@ -26,6 +26,13 @@ public class WelcomePanel extends JPanel {
 
         JPanel searchPanel = new JPanel(new BorderLayout(5, 0));
         searchField = new JTextField();
+
+        searchField.addActionListener(e -> {
+            String query = searchField.getText().trim();
+            mainFrame.performSearch(query);
+            clearSelection();
+        });
+
         JButton searchButton = ActionButton.createSearchButton(searchField, mainFrame);
         searchPanel.add(searchField, BorderLayout.CENTER);
         searchPanel.add(searchButton, BorderLayout.EAST);
@@ -43,9 +50,16 @@ public class WelcomePanel extends JPanel {
         });
         JScrollPane scrollPane = new JScrollPane(resultsList);
 
+        JPanel writePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        writePanel.add(ActionButton.createWriteButton(mainFrame));
+
         JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         navPanel.add(ActionButton.createLoginButton(mainFrame));
         navPanel.add(NavigationButton.createProfileButton(mainFrame));
+
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.add(writePanel, BorderLayout.WEST);
+        bottomPanel.add(navPanel, BorderLayout.EAST);
 
         JPanel centerPanel = new JPanel(new BorderLayout(0, 10));
         centerPanel.add(searchPanel, BorderLayout.NORTH);
@@ -53,7 +67,7 @@ public class WelcomePanel extends JPanel {
 
         add(titleLabel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
-        add(navPanel, BorderLayout.SOUTH);
+        add(bottomPanel, BorderLayout.SOUTH);
 
         List<Article> allArticles = mainFrame.getWiki().articlesList;
         for (Article article : allArticles) {
@@ -66,6 +80,10 @@ public class WelcomePanel extends JPanel {
         for (Article article : results) {
             resultsModel.addElement(article);
         }
+    }
+
+    public void clearSelection() {
+        resultsList.clearSelection();
     }
 
     private static class ArticleListCellRenderer extends DefaultListCellRenderer {

@@ -30,6 +30,9 @@ public class Wiki {
     }
 
     public List<Article> searchArticle(String search) {
+        if (search == null || search.isEmpty()) {
+            return articlesList;
+        }
         List<Article> results = new ArrayList<>();
         for (Article article : articlesList) {
             if (article.getTitle().toLowerCase().contains(search.toLowerCase()) ||

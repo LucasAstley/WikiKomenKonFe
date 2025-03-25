@@ -6,13 +6,13 @@ import main.java.fr.ynov.wikikonmenkonfe.domain.Wiki;
 import javax.swing.*;
 import java.awt.*;
 
-public class UserFrame extends JDialog {
+public class LoginFrame extends JDialog {
     private JTextField usernameField;
     private JComboBox<String> roleComboBox;
     private User loggedInUser;
     private Wiki wiki;
 
-    public UserFrame(Frame parent, Wiki wiki) {
+    public LoginFrame(Frame parent, Wiki wiki) {
         super(parent, "Login", true);
         this.wiki = wiki;
         setSize(300, 150);
