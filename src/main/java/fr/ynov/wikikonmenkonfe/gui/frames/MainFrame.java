@@ -13,6 +13,10 @@ public class MainFrame extends JFrame {
     private final CardLayout cardLayout;
     private final JPanel contentPanel;
 
+    /**
+     * The main frame of the application
+     *
+     */
     public MainFrame(WikiGUI wikiGUI, Wiki wiki) {
         setTitle("WikiKomenKonFé");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

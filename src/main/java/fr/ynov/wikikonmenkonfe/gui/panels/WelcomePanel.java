@@ -15,12 +15,16 @@ public class WelcomePanel extends JPanel {
     private final JList<Article> resultsList;
     private final DefaultListModel<Article> resultsModel;
 
+    /**
+     * The main panel of the application
+     *
+     */
     public WelcomePanel(WikiGUI mainFrame) {
         this.mainFrame = mainFrame;
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JLabel titleLabel = new JLabel("WikiKomenKonFé");
+        JLabel titleLabel = new JLabel(mainFrame.getWiki().getName());
         titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 

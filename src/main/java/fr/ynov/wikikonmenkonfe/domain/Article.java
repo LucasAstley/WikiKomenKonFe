@@ -1,7 +1,7 @@
 package main.java.fr.ynov.wikikonmenkonfe.domain;
 
 public class Article {
-    private final String title;
+    private String title;
     private String content;
     private Category category;
     private User author;
@@ -27,6 +27,10 @@ public class Article {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getContent() {
         return content;
     }
@@ -37,10 +41,6 @@ public class Article {
 
     public User getAuthor() {
         return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
     }
 
     public int getViews() {
@@ -55,9 +55,8 @@ public class Article {
         this.category = category;
     }
 
-    public Article read() {
+    public void read() {
         views++;
-        return this;
     }
 
     public void write(String title, String content) {

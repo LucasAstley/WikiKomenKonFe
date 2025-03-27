@@ -22,6 +22,10 @@ public class ArticlePanel extends JPanel {
     private JButton deleteButton;
     private JButton editButton;
 
+    /**
+     * The article panel that displays the content of an article
+     *
+     */
     public ArticlePanel(WikiGUI mainFrame) {
         this.mainFrame = mainFrame;
         setLayout(new BorderLayout(10, 10));
@@ -130,13 +134,11 @@ public class ArticlePanel extends JPanel {
             if (currentUser instanceof Admin) {
                 ((Admin) currentUser).deleteArticle(currentArticle, mainFrame.getWiki());
                 JOptionPane.showMessageDialog(this, "Article deleted successfully");
-                // Update the articles list before navigating back
                 mainFrame.updateArticlesList();
                 mainFrame.navigateTo(WikiGUI.WELCOME_PANEL);
             } else if (currentUser instanceof Moderator) {
                 ((Moderator) currentUser).deleteArticle(currentArticle, mainFrame.getWiki());
                 JOptionPane.showMessageDialog(this, "Article deleted successfully");
-                // Update the articles list before navigating back
                 mainFrame.updateArticlesList();
                 mainFrame.navigateTo(WikiGUI.WELCOME_PANEL);
             }

@@ -12,6 +12,10 @@ public class LoginFrame extends JDialog {
     private User loggedInUser;
     private Wiki wiki;
 
+    /**
+     * The login popup to create a new user
+     *
+     */
     public LoginFrame(Frame parent, Wiki wiki) {
         super(parent, "Login", true);
         this.wiki = wiki;

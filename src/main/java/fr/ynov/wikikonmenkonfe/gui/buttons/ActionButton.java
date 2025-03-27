@@ -3,7 +3,6 @@ package main.java.fr.ynov.wikikonmenkonfe.gui.buttons;
 import main.java.fr.ynov.wikikonmenkonfe.gui.WikiGUI;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ActionButton extends JButton {

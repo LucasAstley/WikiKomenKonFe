@@ -22,6 +22,11 @@ public class WikiGUI {
     public static final String ARTICLE_PANEL = "Article";
     public static final String USER_PANEL = "User";
 
+    /**
+     * Constructor for the GUI
+     *
+     * @param wiki the wiki to display
+     */
     public WikiGUI(Wiki wiki) {
         this.wiki = wiki;
         mainFrame = new MainFrame(this, wiki);
@@ -31,14 +36,33 @@ public class WikiGUI {
         mainFrame.setVisible(true);
     }
 
+    /**
+     * Navigates to the specified panel
+     *
+     * @param panelName the name of the panel you want to navigate to
+     */
     public void navigateTo(String panelName) {
-        mainFrame.navigateTo(panelName);
+        if (USER_PANEL.equals(panelName)) {
+            try {
+                if (currentUser == null) {
+                    throw new AuthenticationRequiredException("You must be logged in to write articles");
+                }
+                UserPanel userPanel = getUserPanel();
+                userPanel.setUser(currentUser);
+                mainFrame.navigateTo(panelName);
+            } catch (AuthenticationRequiredException e) {
+                JOptionPane.showMessageDialog(mainFrame,
+                        e.getMessage(),
+                        "Authentication Required",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } else {
+            mainFrame.navigateTo(panelName);
+        }
 
         if (WELCOME_PANEL.equals(panelName)) {
             getWelcomePanel().clearSelection();
-        } else if (USER_PANEL.equals(panelName) && currentUser != null) {
-            UserPanel userPanel = getUserPanel();
-            userPanel.setUser(currentUser);
         }
     }
 
@@ -82,7 +106,11 @@ public class WikiGUI {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    /**
+     * Show the edit dialog for the specified article
+     *
+     * @param articleToEdit the article to edit
+     */
     public void showEditDialog(Article articleToEdit) {
         try {
             if (currentUser == null) {
@@ -103,7 +131,7 @@ public class WikiGUI {
                     JOptionPane.WARNING_MESSAGE);
         } catch (PermissionDeniedException e) {
             JOptionPane.showMessageDialog(mainFrame,
-                    "PermissionDeniedException: " + e.getMessage(),
+                    e.getMessage(),
                     "Permission Denied",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -113,12 +141,17 @@ public class WikiGUI {
         return currentUser;
     }
 
+    /**
+     * Perform a search for the specified query
+     *
+     * @param query the string content to search for
+     */
     public void performSearch(String query) {
         List<Article> results = wiki.searchArticle(query);
         WelcomePanel welcomePanel = getWelcomePanel();
         welcomePanel.updateSearchResults(results);
     }
-    
+
     public void updateArticlesList() {
         List<Article> allArticles = wiki.articlesList;
         WelcomePanel welcomePanel = getWelcomePanel();

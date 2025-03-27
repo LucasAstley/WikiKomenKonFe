@@ -57,4 +57,8 @@ public class Wiki {
     public enum UserType {
         READER, WRITER, MODERATOR, ADMIN
     }
+
+    public String getName() {
+        return this.name;
+    }
 }
