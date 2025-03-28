@@ -1,0 +1,92 @@
+[
+  {
+    "title": "KomenKonFé pour hacker le FBI",
+    "content": "1. Ouvrir un terminal et taper \u0027sudo hack FBI\u0027 \n2. Se rendre compte que ça marche pas \n3. Se remettre en question",
+    "category": "ECONOMY",
+    "author": {
+      "name": "John Doe",
+      "type": "Writer"
+    },
+    "views": 0
+  },
+  {
+    "title": "KomenKonFé pour devenir riche en 24h",
+    "content": "1. Miner du Bitcoin sur ton PC de 2009 \n2. Regarder ton CPU prendre feu \n3. Lancer un crowdfunding pour racheter un PC",
+    "category": "ECONOMY",
+    "author": {
+      "name": "John Doe",
+      "type": "Writer"
+    },
+    "views": 0
+  },
+  {
+    "title": "KomenKonFé pour courir plus vite",
+    "content": "1. Installer un SSD dans tes chaussures \n2. Compiler un programme de sprint en Java \n3. Attendre 3 secondes que la JVM démarre avant de partir",
+    "category": "SPORT",
+    "author": {
+      "name": "John Doe",
+      "type": "Writer"
+    },
+    "views": 0
+  },
+  {
+    "title": "KomenKonFé pour devenir un génie",
+    "content": "1. Dire \u0027c\u0027est une question d’algorithmique\u0027 à chaque débat \n2. Boire du café jusqu’à voir le code source de la Matrice \n3. Répondre \u002742\u0027 à toutes les questions",
+    "category": "EDUCATION",
+    "author": {
+      "name": "John Doe",
+      "type": "Writer"
+    },
+    "views": 0
+  },
+  {
+    "title": "KomenKonFé pour sauver la planète",
+    "content": "1. Ne plus imprimer ses mails (c’est un crime) \n2. Compiler en C plutôt qu’en Java pour économiser du CPU \n3. Convaincre Elon Musk d’aller sur Mars et d’y rester",
+    "category": "ENVIRONMENT",
+    "author": {
+      "name": "John Doe",
+      "type": "Writer"
+    },
+    "views": 0
+  },
+  {
+    "title": "KomenKonFé pour éviter les bugs en Java",
+    "content": "1. Ne jamais coder fatigué \n2. Ne jamais coder reposé non plus, sinon on se rend compte du code qu’on a écrit hier \n3. Utiliser Python à la place (traître)",
+    "category": "TECHNOLOGY",
+    "author": {
+      "name": "John Doe",
+      "type": "Writer"
+    },
+    "views": 0
+  },
+  {
+    "title": "KomenKonFé pour impressionner son prof de Java",
+    "content": "1. Dire \u0027J’utilise les design patterns\u0027 même si c’est faux \n2. Remplacer toutes les variables par des noms en latin \n3. Rajouter des \u0027synchronized\u0027 partout pour avoir l’air intelligent",
+    "category": "EDUCATION",
+    "author": {
+      "name": "John Doe",
+      "type": "Writer"
+    },
+    "views": 0
+  },
+  {
+    "title": "KomenKonFé pour coder sans bug",
+    "content": "1. Rêver \n2. Se réveiller \n3. Accepter que c’est impossible",
+    "category": "TECHNOLOGY",
+    "author": {
+      "name": "John Doe",
+      "type": "Writer"
+    },
+    "views": 0
+  },
+  {
+    "title": "KomenKonFé pour coder un site web en Java",
+    "content": "1. Se poser la question \u0027Pourquoi ?\u0027 \n2. Réaliser qu’on aurait dû utiliser JavaScript \n3. Pleurer en configurant Spring Boot",
+    "category": "TECHNOLOGY",
+    "author": {
+      "name": "John Doe",
+      "type": "Writer"
+    },
+    "views": 0
+  }
+]

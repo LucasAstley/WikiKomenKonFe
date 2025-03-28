@@ -11,6 +11,6 @@ public class Moderator extends User {
     }
 
     public void deleteArticle(Article article, Wiki wiki) {
-        wiki.articlesList.remove(article);
+        wiki.removeArticle(article);
     }
 }

@@ -153,7 +153,7 @@ public class WikiGUI {
     }
 
     public void updateArticlesList() {
-        List<Article> allArticles = wiki.articlesList;
+        List<Article> allArticles = wiki.getArticlesList();
         WelcomePanel welcomePanel = getWelcomePanel();
         welcomePanel.updateSearchResults(allArticles);
     }
