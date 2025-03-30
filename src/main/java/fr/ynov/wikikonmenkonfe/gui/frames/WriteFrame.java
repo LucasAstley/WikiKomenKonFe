@@ -148,6 +148,7 @@ public class WriteFrame extends JFrame {
                 existingArticle.setTitle(title);
                 existingArticle.setContent(content);
                 existingArticle.setCategory(category);
+                wikiGUI.getWiki().updateArticle(existingArticle);
                 JOptionPane.showMessageDialog(this, "Article updated successfully!");
                 wikiGUI.displayArticle(existingArticle);
                 dispose();

@@ -73,7 +73,7 @@ public class WelcomePanel extends JPanel {
         add(centerPanel, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
 
-        List<Article> allArticles = mainFrame.getWiki().articlesList;
+        List<Article> allArticles = mainFrame.getWiki().getArticlesList();
         for (Article article : allArticles) {
             resultsModel.addElement(article);
         }

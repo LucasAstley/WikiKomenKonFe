@@ -56,7 +56,7 @@ public class Article {
     }
 
     public void read() {
-        views++;
+        this.views++;
     }
 
     public void write(String title, String content) {

@@ -22,6 +22,8 @@ public class ArticleFactory {
     }
 
     public static void addArticleToWiki(Wiki wiki, Article article) {
-        wiki.addArticle(article);
+        if (article != null && wiki != null) {
+            wiki.addArticle(article);
+        }
     }
 }

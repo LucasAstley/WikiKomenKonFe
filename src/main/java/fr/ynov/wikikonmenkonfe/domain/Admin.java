@@ -20,7 +20,7 @@ public class Admin extends User {
     }
 
     public void deleteArticle(Article article, Wiki wiki) {
-        wiki.articlesList.remove(article);
+        wiki.removeArticle(article);
     }
 
     public void addUser(User user, Wiki wiki) {
