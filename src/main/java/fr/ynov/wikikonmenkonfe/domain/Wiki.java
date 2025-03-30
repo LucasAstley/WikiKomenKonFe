@@ -15,6 +15,7 @@ public class Wiki {
     public String name;
     public List<User> usersList;
     private final String articlesResourcePath = "/articles.json";
+    private final String articlesFileName = "articles.json";
     private final UserFactory userFactory;
     private final ArticleFactory articleFactory;
     private final Gson gson;
@@ -63,6 +64,11 @@ public class Wiki {
         }
     }
 
+    /**
+     * Updates an existing article in the JSON local file
+     *
+     * @param article the article to update
+     */
     public void updateArticle(Article article) {
         try {
             List<Article> articles = loadArticles();
@@ -78,10 +84,14 @@ public class Wiki {
         }
     }
 
+    /**
+     * Loads articles from the JSON local file (or from the resource if the file does not exist)
+     *
+     * @return List of articles
+     * @throws IOException if an error occurs while reading the file
+     */
     private List<Article> loadArticles() throws IOException {
-        String userHome = System.getProperty("user.home");
-        File dataDir = new File(userHome, ".wikikonmenkonfe");
-        File articlesFile = new File(dataDir, "articles.json");
+        File articlesFile = new File(articlesFileName);
 
         if (articlesFile.exists()) {
             try (java.io.Reader reader = new FileReader(articlesFile)) {
@@ -104,20 +114,29 @@ public class Wiki {
         }
     }
 
+    /**
+     * Saves articles to the JSON local file
+     *
+     * @param articles List of articles to save
+     * @throws IOException if an error occurs while writing the file
+     */
     private void saveArticles(List<Article> articles) throws IOException {
-        String userHome = System.getProperty("user.home");
-        File dataDir = new File(userHome, ".wikikonmenkonfe");
-        dataDir.mkdirs();
-        File articlesFile = new File(dataDir, "articles.json");
+        File articlesFile = new File(articlesFileName);
 
         try (FileWriter writer = new FileWriter(articlesFile)) {
             gson.toJson(articles, writer);
         } catch (IOException e) {
-            System.err.println("Error saving articles: " + e.getMessage());
+            System.err.println("Erreur lors de la sauvegarde des articles : " + e.getMessage());
             throw e;
         }
     }
 
+    /**
+     * Searches for articles containing the search string in their title or content
+     *
+     * @param search the search string
+     * @return a list of articles matching the search criteria
+     */
     public List<Article> searchArticle(String search) {
         try {
             List<Article> articles = loadArticles();
@@ -139,6 +158,13 @@ public class Wiki {
         }
     }
 
+    /**
+     * Creates a new user of the specified type
+     *
+     * @param name the name of the user
+     * @param type the type of user to create based on the UserType enum
+     * @return the created user
+     */
     public User createUser(String name, UserType type) {
         User user = switch (type) {
             case READER -> userFactory.createReader(name);
