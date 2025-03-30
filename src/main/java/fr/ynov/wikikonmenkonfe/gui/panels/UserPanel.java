@@ -2,7 +2,7 @@ package main.java.fr.ynov.wikikonmenkonfe.gui.panels;
 
 import main.java.fr.ynov.wikikonmenkonfe.domain.*;
 import main.java.fr.ynov.wikikonmenkonfe.gui.WikiGUI;
-import main.java.fr.ynov.wikikonmenkonfe.gui.buttons.NavigationButton;
+import main.java.fr.ynov.wikikonmenkonfe.gui.buttons.CustomButtons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +39,8 @@ public class UserPanel extends JPanel {
         userInfoPanel.add(roleLabel);
         userInfoPanel.add(Box.createVerticalGlue());
 
-        JButton backButton = NavigationButton.createBackButton(mainFrame);
+        JButton backButton = CustomButtons.createPrimaryButton("Back to Search");
+        backButton.addActionListener(e -> mainFrame.navigateTo(WikiGUI.WELCOME_PANEL));
 
         add(userInfoPanel, BorderLayout.CENTER);
         add(backButton, BorderLayout.SOUTH);
@@ -48,20 +49,6 @@ public class UserPanel extends JPanel {
     public void setUser(User user) {
         this.currentUser = user;
         nameLabel.setText("Name: " + user.getName());
-
-        String role;
-        if (user instanceof Admin) {
-            role = "Admin";
-        } else if (user instanceof Moderator) {
-            role = "Moderator";
-        } else if (user instanceof Writer) {
-            role = "Writer";
-        } else if (user instanceof Reader) {
-            role = "Reader";
-        } else {
-            role = "Unknown";
-        }
-
-        roleLabel.setText("Role: " + role);
+        roleLabel.setText("Role: " + user.getRole());
     }
 }

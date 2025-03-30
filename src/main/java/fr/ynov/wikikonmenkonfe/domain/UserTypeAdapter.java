@@ -4,6 +4,10 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
+/**
+ * This class is a custom Gson TypeAdapter for the User class
+ * It handle converting User objects to JSON and vice versa
+ */
 public class UserTypeAdapter implements JsonSerializer<User>, JsonDeserializer<User> {
 
     @Override

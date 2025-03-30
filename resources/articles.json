@@ -88,5 +88,15 @@
       "type": "Writer"
     },
     "views": 0
+  },
+  {
+    "title": "KomenKonFé pour intéragir avec des JSON en Java",
+    "content": "1. Ne pas planquer son .json à la racine de son PC \n2. Ne pas le mettre dans le dossier temp non plus \n3. Utiliser GSON pour sérialiser et désérialiser comme un pro",
+    "category": "TECHNOLOGY",
+    "author": {
+      "name": "John Doe",
+      "type": "Writer"
+    },
+    "views": 0
   }
 ]

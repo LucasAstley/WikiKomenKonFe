@@ -12,5 +12,7 @@ public abstract class User {
         return name;
     }
 
-    public abstract void viewArticle(Article article);
+    public String getRole() {
+        return this.getClass().getSimpleName();
+    }
 }

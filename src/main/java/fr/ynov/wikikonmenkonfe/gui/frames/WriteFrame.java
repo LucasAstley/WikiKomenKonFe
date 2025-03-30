@@ -7,6 +7,7 @@ import main.java.fr.ynov.wikikonmenkonfe.domain.User;
 import main.java.fr.ynov.wikikonmenkonfe.domain.Writer;
 import main.java.fr.ynov.wikikonmenkonfe.factory.ArticleFactory;
 import main.java.fr.ynov.wikikonmenkonfe.gui.WikiGUI;
+import main.java.fr.ynov.wikikonmenkonfe.gui.buttons.CustomButtons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +27,7 @@ public class WriteFrame extends JFrame {
         this.wikiGUI = wikiGUI;
         this.existingArticle = existingArticle;
         boolean isEditMode = existingArticle != null;
-        
+
         setTitle(isEditMode ? "Edit article" : "Write new article");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(600, 500);
@@ -45,7 +46,7 @@ public class WriteFrame extends JFrame {
         gbc.gridy = 0;
         gbc.gridwidth = 1;
         formPanel.add(titleLabel, gbc);
-        
+
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
@@ -55,14 +56,14 @@ public class WriteFrame extends JFrame {
         Object[] categoryOptions = new Object[Category.values().length + 1];
         categoryOptions[0] = "Select category...";
         System.arraycopy(Category.values(), 0, categoryOptions, 1, Category.values().length);
-        
+
         categoryCombo = new JComboBox<>(categoryOptions);
-        
+
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 0.0;
         formPanel.add(categoryLabel, gbc);
-        
+
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.weightx = 1.0;
@@ -73,13 +74,13 @@ public class WriteFrame extends JFrame {
         contentArea.setLineWrap(true);
         contentArea.setWrapStyleWord(true);
         JScrollPane scrollPane = new JScrollPane(contentArea);
-        
+
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.weightx = 0.0;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         formPanel.add(contentLabel, gbc);
-        
+
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2;
@@ -91,7 +92,7 @@ public class WriteFrame extends JFrame {
         if (isEditMode) {
             titleField.setText(existingArticle.getTitle());
             contentArea.setText(existingArticle.getContent());
-            
+
             Category existingCategory = existingArticle.getCategory();
             if (existingCategory != null) {
                 for (int i = 1; i < categoryOptions.length; i++) {
@@ -104,22 +105,22 @@ public class WriteFrame extends JFrame {
         }
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton cancelButton = new JButton("Cancel");
-        JButton saveButton = new JButton(isEditMode ? "Update" : "Save");
-        
+        JButton cancelButton = CustomButtons.createSecondaryButton("Cancel");
+        JButton saveButton = CustomButtons.createPrimaryButton(isEditMode ? "Update" : "Save");
+
         cancelButton.addActionListener(e -> dispose());
         saveButton.addActionListener(e -> saveArticle());
-        
+
         buttonPanel.add(cancelButton);
         buttonPanel.add(saveButton);
 
         mainPanel.add(formPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-        
+
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
     }
-    
+
     private void saveArticle() {
         String title = titleField.getText().trim();
         String content = contentArea.getText().trim();
@@ -129,20 +130,20 @@ public class WriteFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Please enter a title", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         if (content.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter content", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         if (selectedCategory == null || "Select category...".equals(selectedCategory.toString())) {
             JOptionPane.showMessageDialog(this, "Please select a category", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         Category category = (Category) selectedCategory;
         User currentUser = wikiGUI.getCurrentUser();
-        
+
         if (existingArticle != null) {
             if (currentUser instanceof Admin) {
                 existingArticle.setTitle(title);

@@ -5,11 +5,6 @@ public class Moderator extends User {
         super(name);
     }
 
-    @Override
-    public void viewArticle(Article article) {
-        article.read();
-    }
-
     public void deleteArticle(Article article, Wiki wiki) {
         wiki.removeArticle(article);
     }

@@ -6,7 +6,7 @@ import main.java.fr.ynov.wikikonmenkonfe.domain.Category;
 import main.java.fr.ynov.wikikonmenkonfe.domain.Moderator;
 import main.java.fr.ynov.wikikonmenkonfe.domain.User;
 import main.java.fr.ynov.wikikonmenkonfe.gui.WikiGUI;
-import main.java.fr.ynov.wikikonmenkonfe.gui.buttons.NavigationButton;
+import main.java.fr.ynov.wikikonmenkonfe.gui.buttons.CustomButtons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,16 +67,18 @@ public class ArticlePanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(contentArea);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        buttonPanel.add(NavigationButton.createBackButton(mainFrame));
+        JButton backButton = CustomButtons.createPrimaryButton("Back to Search");
+        backButton.addActionListener(e -> mainFrame.navigateTo(WikiGUI.WELCOME_PANEL));
+        buttonPanel.add(backButton);
 
-        deleteButton = new JButton("Remove Article");
+        deleteButton = CustomButtons.createSecondaryButton("Remove Article");
         deleteButton.setVisible(false);
         deleteButton.addActionListener(e -> deleteArticle());
-        
-        editButton = new JButton("Edit Article");
+
+        editButton = CustomButtons.createSecondaryButton("Edit Article");
         editButton.setVisible(false);
         editButton.addActionListener(e -> editArticle());
-        
+
         buttonPanel.add(deleteButton);
         buttonPanel.add(editButton);
 
@@ -106,45 +108,43 @@ public class ArticlePanel extends JPanel {
         viewsLabel.setText("Views: " + article.getViews());
         contentArea.setText(article.getContent());
         article.read();
-        
+
         updateButtonVisibility();
     }
-    
+
     private void updateButtonVisibility() {
         User currentUser = mainFrame.getCurrentUser();
 
         boolean canDelete = currentUser instanceof Moderator || currentUser instanceof Admin;
         boolean canEdit = currentUser instanceof Admin;
-        
+
         deleteButton.setVisible(canDelete);
         editButton.setVisible(canEdit);
     }
-    
+
     private void deleteArticle() {
         User currentUser = mainFrame.getCurrentUser();
         if (currentUser == null) return;
-        
+
         int confirm = JOptionPane.showConfirmDialog(
                 this,
                 "Are you sure you want to delete this article?",
                 "Confirm Deletion",
                 JOptionPane.YES_NO_OPTION);
-                
+
         if (confirm == JOptionPane.YES_OPTION) {
             if (currentUser instanceof Admin) {
                 ((Admin) currentUser).deleteArticle(currentArticle, mainFrame.getWiki());
-                JOptionPane.showMessageDialog(this, "Article deleted successfully");
-                mainFrame.updateArticlesList();
-                mainFrame.navigateTo(WikiGUI.WELCOME_PANEL);
             } else if (currentUser instanceof Moderator) {
                 ((Moderator) currentUser).deleteArticle(currentArticle, mainFrame.getWiki());
-                JOptionPane.showMessageDialog(this, "Article deleted successfully");
-                mainFrame.updateArticlesList();
-                mainFrame.navigateTo(WikiGUI.WELCOME_PANEL);
             }
         }
+
+        JOptionPane.showMessageDialog(this, "Article deleted successfully");
+        mainFrame.updateArticlesList();
+        mainFrame.navigateTo(WikiGUI.WELCOME_PANEL);
     }
-    
+
     private void editArticle() {
         User currentUser = mainFrame.getCurrentUser();
         if (!(currentUser instanceof Admin)) return;
@@ -152,4 +152,3 @@ public class ArticlePanel extends JPanel {
         mainFrame.showEditDialog(currentArticle);
     }
 }
-

@@ -6,8 +6,4 @@ public class Reader extends User {
         super(name);
     }
 
-    @Override
-    public void viewArticle(Article article) {
-        article.read();
-    }
 }

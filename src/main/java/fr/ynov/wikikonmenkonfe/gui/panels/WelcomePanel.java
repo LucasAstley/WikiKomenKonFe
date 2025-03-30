@@ -2,8 +2,7 @@ package main.java.fr.ynov.wikikonmenkonfe.gui.panels;
 
 import main.java.fr.ynov.wikikonmenkonfe.domain.Article;
 import main.java.fr.ynov.wikikonmenkonfe.gui.WikiGUI;
-import main.java.fr.ynov.wikikonmenkonfe.gui.buttons.ActionButton;
-import main.java.fr.ynov.wikikonmenkonfe.gui.buttons.NavigationButton;
+import main.java.fr.ynov.wikikonmenkonfe.gui.buttons.CustomButtons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +36,12 @@ public class WelcomePanel extends JPanel {
             clearSelection();
         });
 
-        JButton searchButton = ActionButton.createSearchButton(searchField, mainFrame);
+        JButton searchButton = CustomButtons.createPrimaryButton("Search");
+        searchButton.addActionListener(e -> {
+            String query = searchField.getText().trim();
+            mainFrame.performSearch(query);
+        });
+
         searchPanel.add(searchField, BorderLayout.CENTER);
         searchPanel.add(searchButton, BorderLayout.EAST);
 
@@ -55,11 +59,19 @@ public class WelcomePanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(resultsList);
 
         JPanel writePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        writePanel.add(ActionButton.createWriteButton(mainFrame));
+        JButton writeButton = CustomButtons.createPrimaryButton("Write");
+        writeButton.addActionListener(e -> mainFrame.showWriteDialog());
+        writePanel.add(writeButton);
 
         JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        navPanel.add(ActionButton.createLoginButton(mainFrame));
-        navPanel.add(NavigationButton.createProfileButton(mainFrame));
+        JButton loginButton = CustomButtons.createSecondaryButton("Login");
+        loginButton.addActionListener(e -> mainFrame.showLoginDialog());
+
+        JButton profileButton = CustomButtons.createSecondaryButton("My Profile");
+        profileButton.addActionListener(e -> mainFrame.navigateTo(WikiGUI.USER_PANEL));
+
+        navPanel.add(loginButton);
+        navPanel.add(profileButton);
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.add(writePanel, BorderLayout.WEST);

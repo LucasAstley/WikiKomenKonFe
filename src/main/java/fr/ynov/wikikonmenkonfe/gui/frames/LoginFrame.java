@@ -2,6 +2,7 @@ package main.java.fr.ynov.wikikonmenkonfe.gui.frames;
 
 import main.java.fr.ynov.wikikonmenkonfe.domain.User;
 import main.java.fr.ynov.wikikonmenkonfe.domain.Wiki;
+import main.java.fr.ynov.wikikonmenkonfe.gui.buttons.CustomButtons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,9 +35,9 @@ public class LoginFrame extends JDialog {
         roleComboBox = new JComboBox<>(roles);
         panel.add(roleComboBox);
 
-        JButton loginButton = new JButton("Login");
+        JButton loginButton = CustomButtons.createPrimaryButton("Login");
         loginButton.addActionListener(e -> login());
-        JButton cancelButton = new JButton("Cancel");
+        JButton cancelButton = CustomButtons.createSecondaryButton("Cancel");
         cancelButton.addActionListener(e -> dispose());
 
         panel.add(loginButton);
