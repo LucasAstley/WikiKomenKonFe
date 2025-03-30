@@ -126,7 +126,7 @@ public class Wiki {
         try (FileWriter writer = new FileWriter(articlesFile)) {
             gson.toJson(articles, writer);
         } catch (IOException e) {
-            System.err.println("Erreur lors de la sauvegarde des articles : " + e.getMessage());
+            System.err.println("Error saving articles: " + e.getMessage());
             throw e;
         }
     }
