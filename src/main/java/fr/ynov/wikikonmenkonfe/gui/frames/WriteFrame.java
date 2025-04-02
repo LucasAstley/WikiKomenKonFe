@@ -20,8 +20,11 @@ public class WriteFrame extends JFrame {
     private final WikiGUI wikiGUI;
 
     /**
-     * The article writing/editing frame
+     * Constructor for creating a new article or editing an existing one
      *
+     * @param mainFrame       the main frame of the application
+     * @param wikiGUI         the WikiGUI instance
+     * @param existingArticle the existing article to edit, or null if creating a new one
      */
     public WriteFrame(MainFrame mainFrame, WikiGUI wikiGUI, Article existingArticle) {
         this.wikiGUI = wikiGUI;
@@ -121,6 +124,9 @@ public class WriteFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Method to save the article in the wiki
+     */
     private void saveArticle() {
         String title = titleField.getText().trim();
         String content = contentArea.getText().trim();

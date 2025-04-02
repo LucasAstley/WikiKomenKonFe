@@ -16,6 +16,8 @@ public class LoginFrame extends JDialog {
     /**
      * The login popup to create a new user
      *
+     * @param parent the parent frame
+     * @param wiki   the wiki instance
      */
     public LoginFrame(Frame parent, Wiki wiki) {
         super(parent, "Login", true);
@@ -46,6 +48,9 @@ public class LoginFrame extends JDialog {
         add(panel);
     }
 
+    /**
+     * Displays the login dialog and waits for user input
+     */
     private void login() {
         String username = usernameField.getText().trim();
         if (username.isEmpty()) {
@@ -60,6 +65,11 @@ public class LoginFrame extends JDialog {
         dispose();
     }
 
+    /**
+     * Returns the actual logged-in user
+     *
+     * @return the actual logged-in user
+     */
     public User getLoggedInUser() {
         return loggedInUser;
     }

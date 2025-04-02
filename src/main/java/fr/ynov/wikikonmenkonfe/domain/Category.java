@@ -2,22 +2,25 @@ package main.java.fr.ynov.wikikonmenkonfe.domain;
 
 public enum Category {
 
-    POLITICS("Politics"),
-    SPORT("Sport"),
-    SCIENCE("Science"),
+    /**
+     * The different categories of the wiki articles
+     */
     CULTURE("Culture"),
     ECONOMY("Economy"),
-    TECHNOLOGY("Technology"),
-    HEALTH("Health"),
     EDUCATION("Education"),
     ENVIRONMENT("Environment"),
-    SOCIETY("Society"),
+    HEALTH("Health"),
     HISTORY("History"),
-    LITERATURE("Literature");
+    LITERATURE("Literature"),
+    POLITICS("Politics"),
+    SCIENCE("Science"),
+    SOCIETY("Society"),
+    SPORT("Sport"),
+    TECHNOLOGY("Technology");
 
     private String category;
 
-    private Category(String categoryName) {
+    Category(String categoryName) {
         this.category = categoryName;
     }
 

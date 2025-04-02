@@ -20,6 +20,12 @@ public class Wiki {
     private final ArticleFactory articleFactory;
     private final Gson gson;
 
+    /**
+     * Constructor for the Wiki class
+     *
+     * @param name the name of the wiki
+     * @throws IOException if an error occurs while reading the articles file
+     */
     public Wiki(String name) {
         this.name = name;
         this.usersList = new ArrayList<>();
@@ -40,10 +46,21 @@ public class Wiki {
         }
     }
 
+    /**
+     * Adds a user to the wiki
+     *
+     * @param user the user to add
+     */
     public void addUser(User user) {
         usersList.add(user);
     }
 
+    /**
+     * Add an article to the wiki
+     *
+     * @param article the article to add
+     * @throws IOException if an error occurs while reading or writing the file
+     */
     public void addArticle(Article article) {
         try {
             List<Article> articles = loadArticles();
@@ -54,6 +71,12 @@ public class Wiki {
         }
     }
 
+    /**
+     * Removes an article from the wiki
+     *
+     * @param article the article to remove
+     * @throws IOException if an error occurs while reading or writing the file
+     */
     public void removeArticle(Article article) {
         try {
             List<Article> articles = loadArticles();
@@ -68,6 +91,7 @@ public class Wiki {
      * Updates an existing article in the JSON local file
      *
      * @param article the article to update
+     * @throws IOException if an error occurs while reading or writing the file
      */
     public void updateArticle(Article article) {
         try {
@@ -95,7 +119,8 @@ public class Wiki {
 
         if (articlesFile.exists()) {
             try (java.io.Reader reader = new FileReader(articlesFile)) {
-                Type articleListType = new TypeToken<ArrayList<Article>>(){}.getType();
+                Type articleListType = new TypeToken<ArrayList<Article>>() {
+                }.getType();
                 List<Article> articles = gson.fromJson(reader, articleListType);
                 return articles != null ? articles : new ArrayList<>();
             }
@@ -107,7 +132,8 @@ public class Wiki {
             }
 
             try (java.io.Reader reader = new InputStreamReader(is)) {
-                Type articleListType = new TypeToken<ArrayList<Article>>(){}.getType();
+                Type articleListType = new TypeToken<ArrayList<Article>>() {
+                }.getType();
                 List<Article> articles = gson.fromJson(reader, articleListType);
                 return articles != null ? articles : new ArrayList<>();
             }
@@ -136,6 +162,7 @@ public class Wiki {
      *
      * @param search the search string
      * @return a list of articles matching the search criteria
+     * @throws IOException if an error occurs while reading the file
      */
     public List<Article> searchArticle(String search) {
         try {
@@ -176,6 +203,12 @@ public class Wiki {
         return user;
     }
 
+    /**
+     * Gets the list of articles from the JSON local file
+     *
+     * @return List of articles
+     * @throws IOException if an error occurs while reading the file
+     */
     public List<Article> getArticlesList() {
         try {
             return loadArticles();

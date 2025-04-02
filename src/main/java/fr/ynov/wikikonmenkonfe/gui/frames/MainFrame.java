@@ -15,7 +15,6 @@ public class MainFrame extends JFrame {
 
     /**
      * The main frame of the application
-     *
      */
     public MainFrame(WikiGUI wikiGUI, Wiki wiki) {
         setTitle("WikiKomenKonFé");
@@ -40,10 +39,20 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Navigates to the specified panel
+     *
+     * @param panelName the name of the panel to navigate to
+     */
     public void navigateTo(String panelName) {
         cardLayout.show(contentPanel, panelName);
     }
 
+    /**
+     * Returns the content panel of the main frame
+     *
+     * @return the content panel
+     */
     public JPanel getContentPanel() {
         return contentPanel;
     }

@@ -70,6 +70,9 @@ public class WikiGUI {
         return wiki;
     }
 
+    /**
+     * Show the user login dialog
+     */
     public void showLoginDialog() {
         LoginFrame loginFrame = new LoginFrame(mainFrame, wiki);
         loginFrame.setVisible(true);
@@ -81,6 +84,9 @@ public class WikiGUI {
         }
     }
 
+    /**
+     * Show the article write dialog
+     */
     public void showWriteDialog() {
         try {
             if (currentUser == null) {
@@ -106,6 +112,7 @@ public class WikiGUI {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
+
     /**
      * Show the edit dialog for the specified article
      *
@@ -152,12 +159,20 @@ public class WikiGUI {
         welcomePanel.updateSearchResults(results);
     }
 
+    /**
+     * Update the list of articles in the welcome panel
+     */
     public void updateArticlesList() {
         List<Article> allArticles = wiki.getArticlesList();
         WelcomePanel welcomePanel = getWelcomePanel();
         welcomePanel.updateSearchResults(allArticles);
     }
 
+    /**
+     * Display the specified article in the article panel
+     *
+     * @param article the article to display
+     */
     public void displayArticle(Article article) {
         if (article != null) {
             ArticlePanel articlePanel = getArticlePanel();

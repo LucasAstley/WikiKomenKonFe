@@ -15,8 +15,9 @@ public class WelcomePanel extends JPanel {
     private final DefaultListModel<Article> resultsModel;
 
     /**
-     * The main panel of the application
+     * Constructor for the WelcomePanel
      *
+     * @param mainFrame The main frame of the application
      */
     public WelcomePanel(WikiGUI mainFrame) {
         this.mainFrame = mainFrame;
@@ -91,6 +92,11 @@ public class WelcomePanel extends JPanel {
         }
     }
 
+    /**
+     * Updates the search results in the list
+     *
+     * @param results The list of articles to display
+     */
     public void updateSearchResults(List<Article> results) {
         resultsModel.clear();
         for (Article article : results) {
@@ -98,10 +104,16 @@ public class WelcomePanel extends JPanel {
         }
     }
 
+    /**
+     * Clears the search field
+     */
     public void clearSelection() {
         resultsList.clearSelection();
     }
 
+    /**
+     * Custom cell renderer for the JList to display article titles
+     */
     private static class ArticleListCellRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index,

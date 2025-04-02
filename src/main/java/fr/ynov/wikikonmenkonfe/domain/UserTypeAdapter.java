@@ -10,6 +10,14 @@ import java.lang.reflect.Type;
  */
 public class UserTypeAdapter implements JsonSerializer<User>, JsonDeserializer<User> {
 
+    /**
+     * This method is used to convert a User object to JSON
+     *
+     * @param src       the User object to convert
+     * @param typeOfSrc the type of the object
+     * @param context   the context of the conversion
+     * @return the JSON representation of the User object
+     */
     @Override
     public JsonElement serialize(User src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject result = new JsonObject();
@@ -18,13 +26,21 @@ public class UserTypeAdapter implements JsonSerializer<User>, JsonDeserializer<U
         return result;
     }
 
+    /**
+     * This method is used to convert JSON to a User object
+     *
+     * @param json    the JSON representation of the User object
+     * @param typeOfT the type of the object
+     * @param context the context of the conversion
+     * @return the User object
+     * @throws JsonParseException if the JSON is not valid
+     */
     @Override
     public User deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
         String name = jsonObject.get("name").getAsString();
 
-        // Default to Reader if type isn't specified
         if (!jsonObject.has("type")) {
             return new Reader(name);
         }

@@ -23,8 +23,9 @@ public class ArticlePanel extends JPanel {
     private JButton editButton;
 
     /**
-     * The article panel that displays the content of an article
+     * Constructor for the ArticlePanel class
      *
+     * @param mainFrame The main WikiGUI frame
      */
     public ArticlePanel(WikiGUI mainFrame) {
         this.mainFrame = mainFrame;
@@ -87,6 +88,11 @@ public class ArticlePanel extends JPanel {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Sets the article to be displayed in the panel
+     *
+     * @param article The article to display
+     */
     public void setArticle(Article article) {
         this.currentArticle = article;
         titleLabel.setText(article.getTitle());
@@ -112,6 +118,9 @@ public class ArticlePanel extends JPanel {
         updateButtonVisibility();
     }
 
+    /**
+     * Updates the visibility of the delete and edit buttons based on the current user's role
+     */
     private void updateButtonVisibility() {
         User currentUser = mainFrame.getCurrentUser();
 
@@ -122,6 +131,9 @@ public class ArticlePanel extends JPanel {
         editButton.setVisible(canEdit);
     }
 
+    /**
+     * Deletes the current article if the user is an admin or moderator
+     */
     private void deleteArticle() {
         User currentUser = mainFrame.getCurrentUser();
         if (currentUser == null) return;
@@ -145,6 +157,9 @@ public class ArticlePanel extends JPanel {
         mainFrame.navigateTo(WikiGUI.WELCOME_PANEL);
     }
 
+    /**
+     * Opens the edit dialog for the current article if the user is an admin
+     */
     private void editArticle() {
         User currentUser = mainFrame.getCurrentUser();
         if (!(currentUser instanceof Admin)) return;

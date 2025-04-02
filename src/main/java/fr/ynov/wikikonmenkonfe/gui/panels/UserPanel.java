@@ -14,8 +14,9 @@ public class UserPanel extends JPanel {
     private User currentUser;
 
     /**
-     * The user information panel
+     * Constructor for UserPanel
      *
+     * @param mainFrame The main frame of the application
      */
     public UserPanel(WikiGUI mainFrame) {
         this.mainFrame = mainFrame;
@@ -46,6 +47,11 @@ public class UserPanel extends JPanel {
         add(backButton, BorderLayout.SOUTH);
     }
 
+    /**
+     * Update the user information displayed in the panel
+     *
+     * @param user The user object containing the information to display
+     */
     public void setUser(User user) {
         this.currentUser = user;
         nameLabel.setText("Name: " + user.getName());

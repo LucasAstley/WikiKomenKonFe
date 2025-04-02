@@ -7,17 +7,38 @@ public class Article {
     private User author;
     private int views;
 
+    /**
+     * Constructor for the Article class
+     *
+     * @param title   the title of the article
+     * @param content the content of the article
+     */
     public Article(String title, String content) {
         this.title = title;
         this.content = content;
         this.views = 0;
     }
 
+    /**
+     * Constructor for the Article class with author
+     *
+     * @param title   the title of the article
+     * @param content the content of the article
+     * @param author  the author of the article
+     */
     public Article(String title, String content, User author) {
         this(title, content);
         this.author = author;
     }
 
+    /**
+     * Constructor for the Article class with author and category
+     *
+     * @param title    the title of the article
+     * @param content  the content of the article
+     * @param author   the author of the article
+     * @param category the category of the article
+     */
     public Article(String title, String content, User author, Category category) {
         this(title, content, author);
         this.category = category;
@@ -55,11 +76,10 @@ public class Article {
         this.category = category;
     }
 
+    /**
+     * Read the article and increment the view counter
+     */
     public void read() {
         this.views++;
-    }
-
-    public void write(String title, String content) {
-        this.content = content;
     }
 }
