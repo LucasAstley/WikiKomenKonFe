@@ -32,3 +32,4 @@ java -jar WikiKomenKonFe.jar
 
 ![WikiKomenKonFé demo](readmeFiles/demo-gif.gif)
 
+Made with ❤️ by Lucas LASBENNES
